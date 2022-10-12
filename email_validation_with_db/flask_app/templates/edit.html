@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <title>Edit</title>
+</head>
+<body>
+    <div class="container p-4">
+        <div class="container d-flex justify-content-between">
+            <h1 class="mt-2 mb-2">Edit User {{ id }}:</h1>
+            <a href="/users" class="btn btn-primary mt-3" style="height: 40px;">Home</a>
+        </div>
+        <form action="/update" method="post">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p style="color: red;">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div class="mb-3">
+                <input type="hidden" name="id" value="{{id}}">
+                <label for="first_name" class="form-label">First Name:</label>
+                <input type="text" name="first_name" class="form-control" value="{{ user.first_name }}">
+            </div>
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Last Name:</label>
+                <input type="text" name="last_name" class="form-control" value="{{ user.last_name }}">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="text" name="email" class="form-control" value="{{ user.email }}">
+            </div>
+            <input type="submit" class="btn btn-success" value="Update User">
+            <a href="/users/{{user.id}}" class="btn btn-primary">Show User</a>
+        </form>
+    </div>
+</body>
+</html>

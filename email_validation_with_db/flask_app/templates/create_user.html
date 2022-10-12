@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <title>Create</title>
+</head>
+<body>
+    <div class="container">
+        <div class="container d-flex justify-content-between">
+            <h1 class="mt-2 mb-2">Add a New User</h1>
+            <a href="/users" class="btn btn-primary mt-3" style="height: 40px;">Home</a>
+        </div>
+        <form action="/create" method="post">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p style="color: red;">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div class="mb-3">
+                <label for="first_name" class="form-label">First Name:</label>
+                <input type="text" name="first_name" class="form-control" placeholder="first name...">
+            </div>
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Last Name:</label>
+                <input type="text" name="last_name" class="form-control" placeholder="last name...">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="text" name="email" class="form-control" placeholder="email...">
+            </div>
+            <input type="submit" class="btn btn-success" value="Create User">
+        </form>
+    </div>
+</body>
+</html>
